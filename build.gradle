@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.testng:testng:7.5'
+
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.30'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation("com.squareup.okhttp3:okhttp:4.9.0")
+    implementation 'ch.qos.logback:logback-classic:1.2.11'
+}
+
+def platform = org.gradle.internal.os.OperatingSystem.current().isWindows() ? 'win' :
+        org.gradle.internal.os.OperatingSystem.current().isLinux() ? 'linux' :
+                'mac'
+
+dependencies {
+    implementation "org.openjfx:javafx-base:20:${platform}"
+    implementation "org.openjfx:javafx-controls:20:${platform}"
+    implementation "org.openjfx:javafx-graphics:20:${platform}"
+}
+
+test {
+    useTestNG()
+}
