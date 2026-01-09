@@ -13,7 +13,7 @@ import java.util.Random;
 
 public class AddContactTestsOkHttp {
 
-    String token = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiXSwic3ViIjoibWlraC5wYW5maWxvdnZAZ21haWwuY29tIiwiaXNzIjoiUmVndWxhaXQiLCJleHAiOjE3NjgzODAwOTIsImlhdCI6MTc2Nzc4MDA5Mn0.9TP4RJxFd74yMKCAqPpb7mE_kTGUY24aDt-w2WocEao";
+    String token = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiXSwic3ViIjoibWlraC5wYW5maWxvdnZAZ21haWwuY29tIiwiaXNzIjoiUmVndWxhaXQiLCJleHAiOjE3Njg1NDM5NTEsImlhdCI6MTc2Nzk0Mzk1MX0.PW5KRXcbn0aO33SsNNfVuAoNezbDJWmBgnqO-Tu5C8A";
     Gson gson = new Gson();
     OkHttpClient client = new OkHttpClient();
     public static final MediaType JSON = MediaType.get("application/json;charset=utf-8");
@@ -88,6 +88,32 @@ public class AddContactTestsOkHttp {
         ErrorDTO errorDTO = gson.fromJson(response.body().string(), ErrorDTO.class);
         System.out.println(errorDTO.getError());
         Assert.assertEquals(errorDTO.getError(),("Bad Request"));
+    }
+
+    @Test
+    public void addNewContactWrongNameContact() throws IOException {
+        ContactDTO contactDto = ContactDTO.builder()
+                .lastName("Wolf")
+                .email("jenny@mail.com")
+                .address("TV")
+                .phone("9876543210")
+                .description("Friend").build();
+
+        RequestBody body = RequestBody.create(gson.toJson(contactDto),JSON);
+
+        Request request = new Request.Builder()
+                .url("https://contactapp-telran-backend.herokuapp.com/v1/contacts")
+                .post(body)
+                .addHeader("Authorization",token)
+                .build();
+
+        Response response = client.newCall(request).execute();
+        Assert.assertFalse(response.isSuccessful());
+        Assert.assertEquals(response.code(),400);
+
+        ErrorDTO errorDto = gson.fromJson(response.body().string(), ErrorDTO.class);
+        System.out.println(errorDto.getMessage());
+        Assert.assertTrue(errorDto.getMessage().toString().contains("name=must not be blank"));
     }
 
 

@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class GetAllContactsTestsOkHttp {
-    String token = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiXSwic3ViIjoibWlraC5wYW5maWxvdnZAZ21haWwuY29tIiwiaXNzIjoiUmVndWxhaXQiLCJleHAiOjE3NjgzODAwOTIsImlhdCI6MTc2Nzc4MDA5Mn0.9TP4RJxFd74yMKCAqPpb7mE_kTGUY24aDt-w2WocEao";
+    String token = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiXSwic3ViIjoibWlraC5wYW5maWxvdnZAZ21haWwuY29tIiwiaXNzIjoiUmVndWxhaXQiLCJleHAiOjE3Njg1NDM5NTEsImlhdCI6MTc2Nzk0Mzk1MX0.PW5KRXcbn0aO33SsNNfVuAoNezbDJWmBgnqO-Tu5C8A";
     Gson gson = new Gson();
     OkHttpClient client = new OkHttpClient();
 

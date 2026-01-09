@@ -21,6 +21,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation("com.squareup.okhttp3:okhttp:4.9.0")
     implementation 'ch.qos.logback:logback-classic:1.2.11'
+
+    implementation 'io.rest-assured:rest-assured:4.5.1'
 }
 
 def platform = org.gradle.internal.os.OperatingSystem.current().isWindows() ? 'win' :

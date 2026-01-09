@@ -2,6 +2,7 @@ package okhttp;
 
 import com.google.gson.Gson;
 import dto.AuthRequestDTO;
+import dto.AuthResponseDTO;
 import dto.ErrorDTO;
 import okhttp3.*;
 import org.testng.Assert;
@@ -32,6 +33,8 @@ public class RegistrationTestsOkHttp {
         Response response = client.newCall(request).execute();
         Assert.assertTrue(response.isSuccessful());
         Assert.assertEquals(response.code(),200);
+        AuthResponseDTO responseDTO = gson.fromJson(response.body().string(), AuthResponseDTO.class);
+        String token = responseDTO.getToken();
     }
 
     @Test
